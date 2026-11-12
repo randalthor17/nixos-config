@@ -18,6 +18,7 @@
   services.displayManager.dux-greeter = {
     enable = true;
     compositor.name = "niri";
+    configHome = "/home/rand";
   };
   programs.dux-shell.enable = true;
   programs.dux-search.enable = true;

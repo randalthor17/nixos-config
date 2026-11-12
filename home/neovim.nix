@@ -10,6 +10,11 @@
       lang.nix.enable = true;
       lang.markdown.enable = true;
       lang.clangd.enable = true;
+      lang.go = {
+        enable = true;
+        installDependencies = true; # gopls, gofumpt, goimports, impl, golangci-lint, ...
+        installRuntimeDependencies = true; # go toolchain
+      };
     };
 
     extraPackages = with pkgs; [
@@ -18,6 +23,7 @@
       markdownlint-cli2
       kdlfmt
       clang-tools
+      gotools # goimports (lang.go formatter; not pulled in by installDependencies)
 
       # :checkhealth fixes
       tree-sitter # nvim-treesitter parser builds
