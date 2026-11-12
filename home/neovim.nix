@@ -41,6 +41,35 @@
     # "folke--trouble.nvim" but the plugin is "trouble.nvim"), so trouble never
     # reaches the rtp or runs setup and its sources never register.
     # Declaring it as a dependency makes lazy load it properly first.
+    # noice can't run when the UI draws its own cmdline (ext_cmdline GUIs).
+    # GUIs attach via --embed before config is sourced, so list_uis() is valid here.
+    plugins.noice-gui = ''
+      return {
+        "folke/noice.nvim",
+        cond = function()
+          if vim.g.neovide then
+            return false
+          end
+          for _, ui in ipairs(vim.api.nvim_list_uis()) do
+            if ui.ext_cmdline then
+              return false
+            end
+          end
+          return true
+        end,
+      }
+    '';
+
+    # Same dev-path naming issue: the dashboard's "Restore Session" require()s
+    # persistence before lazy.nvim ran its setup (opts.dir nil -> E5108).
+    # Load it at startup so setup() always runs first.
+    plugins.persistence-eager = ''
+      return {
+        "folke/persistence.nvim",
+        lazy = false,
+      }
+    '';
+
     plugins.lualine-trouble = ''
       return {
         "nvim-lualine/lualine.nvim",
