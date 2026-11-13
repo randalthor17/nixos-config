@@ -10,9 +10,13 @@
     systemd.enable = false;
     portalPackage = null;
 
-    # Dux Shell writes these into ~/.config/niri/dms/. Included last so its
-    # colors win. layout/input/binds/outputs are skipped on purpose (mine).
+    # Dux Shell writes these into ~/.config/niri/dms/. Included after `settings`
+    # so Dux wins. layout.kdl = Settings > System & integrations > niri (gaps,
+    # borders, corner radius); it replaces that page's "add include" button,
+    # which can't edit the read-only config.kdl. input/binds/outputs/cursor
+    # stay skipped (managed here).
     extraConfig = ''
+      include optional=true "dms/layout.kdl"
       include optional=true "dms/colors.kdl"
       include optional=true "dms/alttab.kdl"
       include optional=true "dms/windowrules.kdl"
