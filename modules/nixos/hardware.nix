@@ -1,6 +1,8 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 
 {
+  imports = [ inputs.hid-hwre.nixosModules.default ];
+
   hardware.graphics.enable = true;
   hardware.bluetooth.enable = true;
 
@@ -22,6 +24,9 @@
   # ---- Power -------------------------------------------------------------
   services.power-profiles-daemon.enable = true;
   services.upower.enable = true;
+
+  # MK75 keyboard + ATK VXE R1 NK mouse: battery in UPower, keyboard backlight.
+  hardware.hid-hwre.enable = true;
 
   # The USB mouse dongle (wake-enabled) fires a PME wake if suspend starts while
   # input is still settling, so the PC wakes immediately. Delay entering S3

@@ -34,6 +34,26 @@
         "type": "github"
       }
     },
+    "hid-hwre": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1794688421,
+        "narHash": "sha256-EF17wvkzOyBNcP+ASpQGsHUOVr/PTomKBSh6b3tlMmA=",
+        "owner": "randalthor17",
+        "repo": "hw-re-upower-kernel-module",
+        "rev": "fda0693fc5428f705547fbbeeb19632b088e6139",
+        "type": "github"
+      },
+      "original": {
+        "owner": "randalthor17",
+        "repo": "hw-re-upower-kernel-module",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -108,6 +128,7 @@
     "root": {
       "inputs": {
         "base46": "base46",
+        "hid-hwre": "hid-hwre",
         "home-manager": "home-manager",
         "lazyvim": "lazyvim",
         "nixpkgs": "nixpkgs_2"

@@ -11,6 +11,12 @@
 
     lazyvim.url = "github:pfassina/lazyvim-nix";
 
+    # Battery + keyboard backlight for the MK75 keyboard and ATK VXE R1 NK mouse.
+    hid-hwre = {
+      url = "github:randalthor17/hw-re-upower-kernel-module";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Neovim colorschemes (also what Dux Shell's neovim template targets).
     base46 = {
       url = "github:duxlabs-dev/base46";
