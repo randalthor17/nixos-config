@@ -8,6 +8,7 @@
     ./theming.nix
     ./niri.nix
     ./apps.nix
+    ./zen.nix
     ./kdeconnect.nix
     ./dev.nix
     ./neovim.nix

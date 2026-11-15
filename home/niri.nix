@@ -83,7 +83,7 @@
 
         # Apps
         "Mod+Return".spawn = "kitty";
-        "Mod+B".spawn = "firefox";
+        "Mod+B".spawn = "zen-beta";
         "Mod+E".spawn = [
           "dfiles"
           "open"

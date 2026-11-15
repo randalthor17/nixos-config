@@ -11,6 +11,18 @@
 
     lazyvim.url = "github:pfassina/lazyvim-nix";
 
+    # Zen browser (not in nixpkgs); home-manager module in home/zen.nix.
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        home-manager.follows = "home-manager";
+      };
+    };
+
+    # Declarative flatpaks (qBittorrent), see modules/nixos/services.nix.
+    nix-flatpak.url = "github:gmodena/nix-flatpak";
+
     # Battery + keyboard backlight for the MK75 keyboard and ATK VXE R1 NK mouse.
     hid-hwre = {
       url = "github:randalthor17/hw-re-upower-kernel-module";
@@ -25,7 +37,12 @@
   };
 
   outputs =
-    { nixpkgs, home-manager, ... }@inputs:
+    {
+      nixpkgs,
+      home-manager,
+      nix-flatpak,
+      ...
+    }@inputs:
     let
       systems = [
         "x86_64-linux"
@@ -40,6 +57,7 @@
         modules = [
           ./hosts/nixos
           home-manager.nixosModules.home-manager
+          nix-flatpak.nixosModules.nix-flatpak
           {
             home-manager = {
               useGlobalPkgs = true;

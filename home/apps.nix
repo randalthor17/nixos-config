@@ -10,15 +10,16 @@
     extraConfig = "globinclude dank-*.conf";
   };
 
-  programs.firefox = {
-    enable = true;
-    # Pywalfox: native host + extension (Dux Shell themes Firefox through it).
-    nativeMessagingHosts = [ pkgs.pywalfox-native ];
-    policies.ExtensionSettings."pywalfox@frewacom.org" = {
-      install_url = "https://addons.mozilla.org/firefox/downloads/latest/pywalfox/latest.xpi";
-      installation_mode = "normal_installed";
-    };
-  };
+  # Replaced by Zen (home/zen.nix), which carries the same Pywalfox setup.
+  # programs.firefox = {
+  #   enable = true;
+  #   # Pywalfox: native host + extension (Dux Shell themes Firefox through it).
+  #   nativeMessagingHosts = [ pkgs.pywalfox-native ];
+  #   policies.ExtensionSettings."pywalfox@frewacom.org" = {
+  #     install_url = "https://addons.mozilla.org/firefox/downloads/latest/pywalfox/latest.xpi";
+  #     installation_mode = "normal_installed";
+  #   };
+  # };
   programs.chromium.enable = true;
 
   programs.zathura.enable = true; # PDFs
@@ -26,11 +27,22 @@
   programs.yt-dlp.enable = true;
 
   home.packages = with pkgs; [
-    # Dux Shell calls `pywalfox` from PATH to theme Firefox
-    pywalfox-native
+    # Dux Shell calls `pywalfox` from PATH to theme Firefox (unused with Zen)
+    # pywalfox-native
 
     # Files / viewers / media
     loupe # images
     pavucontrol
+
+    # CLI / network
+    ani-cli
+    copyparty
+    rclone
+
+    # Windows apps in a container (needs podman, see modules/nixos/services.nix)
+    winboat
+
+    # AMD GPU monitor
+    amdgpu_top
   ];
 }
