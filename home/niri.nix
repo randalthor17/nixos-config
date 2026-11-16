@@ -31,6 +31,12 @@
     settings = {
       prefer-no-csd = { };
 
+      # Same cursor as home.pointerCursor (home/theming.nix)
+      cursor = {
+        xcursor-theme = "Bibata-Modern-Ice";
+        xcursor-size = 24;
+      };
+
       hotkey-overlay.skip-at-startup = { };
 
       output = {

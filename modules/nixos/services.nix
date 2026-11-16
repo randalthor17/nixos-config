@@ -35,6 +35,9 @@
         "xdg-config/gtk-4.0:ro"
         "xdg-config/kdeglobals:ro"
         "xdg-data/themes:ro"
+        # Papirus from the nix store, linked by home/theming.nix
+        "~/.icons/Papirus:ro"
+        "~/.icons/Papirus-Dark:ro"
       ];
       Environment.QT_QPA_PLATFORMTHEME = "kde";
     };
