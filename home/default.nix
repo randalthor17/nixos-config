@@ -6,6 +6,7 @@
   imports = [
     ./shell.nix
     ./theming.nix
+    ./input.nix
     ./niri.nix
     ./apps.nix
     ./zen.nix

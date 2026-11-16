@@ -7,6 +7,11 @@
     enable = true;
 
     extras = {
+      # LazyVim auto-enables blink.cmp as its completion engine, but lazyvim-nix
+      # only provides plugins for declared extras. Undeclared, lazy.nvim tries
+      # to git-clone blink.cmp + friendly-snippets and then fails writing
+      # helptags into the read-only store (E152 on startup).
+      coding.blink.enable = true;
       lang.nix.enable = true;
       lang.markdown.enable = true;
       lang.clangd.enable = true;
@@ -73,6 +78,14 @@
       return {
         "folke/persistence.nvim",
         lazy = false,
+      }
+    '';
+
+    # blink.cmp's friendly-snippets dependency isn't provided by lazyvim-nix;
+    # load it from nixpkgs so lazy.nvim doesn't try to clone it.
+    plugins.friendly-snippets = ''
+      return {
+        { "rafamadriz/friendly-snippets", name = "friendly-snippets", dir = "${pkgs.vimPlugins.friendly-snippets}" },
       }
     '';
 
