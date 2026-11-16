@@ -94,6 +94,15 @@
       }
     '';
 
+    # lazyvim-nix builds blink.cmp from source without its Rust fuzzy matcher
+    # (-> "No fuzzy matching library found", Lua fallback). nixpkgs' build of
+    # the same release ships target/release/libblink_cmp_fuzzy.so.
+    plugins.blink-nixpkgs = ''
+      return {
+        { "saghen/blink.cmp", dev = false, dir = "${pkgs.vimPlugins.blink-cmp}" },
+      }
+    '';
+
     plugins.lualine-trouble = ''
       return {
         "nvim-lualine/lualine.nvim",
