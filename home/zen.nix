@@ -2,6 +2,8 @@
 
 let
   profile = "default";
+  # Existing profile dir Zen already uses (holds tabs, logins, mods).
+  profilePath = "balb4vgo.Default (release)";
 in
 {
   imports = [ inputs.zen-browser.homeModules.beta ];
@@ -18,6 +20,7 @@ in
     profiles.${profile} = {
       id = 0;
       isDefault = true;
+      path = profilePath;
       settings."toolkit.legacyUserProfileCustomizations.stylesheets" = true;
     };
 
@@ -40,6 +43,6 @@ in
   };
 
   # Live link (not a store copy) so Dux's regenerated colors apply on restart.
-  home.file."${config.programs.zen-browser.configPath}/${profile}/chrome/userChrome.css".source =
+  home.file."${config.programs.zen-browser.configPath}/${profilePath}/chrome/userChrome.css".source =
     config.lib.file.mkOutOfStoreSymlink "${config.xdg.configHome}/dms/zen.css";
 }

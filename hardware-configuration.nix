@@ -18,6 +18,7 @@
     "nvme"
     "xhci_pci"
     "ahci"
+    "usb_storage"
     "usbhid"
     "sd_mod"
   ];
@@ -26,20 +27,22 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/dccb4dba-610f-42a7-9592-4e6446520d13";
+    device = "/dev/disk/by-uuid/a8b96a6b-d141-4188-99de-9d5e4dc3be2a";
     fsType = "ext4";
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/BB83-DEF4";
+    device = "/dev/disk/by-uuid/DEB6-9B2E";
     fsType = "vfat";
     options = [
-      "fmask=0022"
-      "dmask=0022"
+      "fmask=0077"
+      "dmask=0077"
     ];
   };
 
-  swapDevices = [ ];
+  swapDevices = [
+    { device = "/dev/disk/by-uuid/9f304ace-e5d3-493c-b8be-24188ee47b46"; }
+  ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;

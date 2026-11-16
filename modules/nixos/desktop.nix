@@ -34,4 +34,7 @@
   services.gnome.gnome-online-accounts.enable = true;
   services.gnome.gnome-keyring.enable = true;
   programs.dconf.enable = true;
+
+  # setuid pkexec wrapper, so apps can elevate through polkit
+  security.polkit.enablePkexecWrapper = true;
 }
