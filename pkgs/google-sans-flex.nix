@@ -6,11 +6,11 @@
 
 stdenvNoCC.mkDerivation rec {
   pname = "google-sans-flex";
-  version = "4.007";
+  version = "5.000";
 
   src = fetchzip {
     url = "https://github.com/googlefonts/googlesans-flex/releases/download/v${version}/GoogleSansFlex-v${version}.zip";
-    hash = "sha256-zYA3Tke3J2QUKJBSj4qAVDvmgFyndMhSuJKjy7uLiiM=";
+    hash = "sha256-NkCK4oZtmkuVuMFnZiVMeJyG0zuy9Ew0sxUQXzA4oKY=";
   };
 
   installPhase = ''
