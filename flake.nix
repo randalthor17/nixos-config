@@ -69,6 +69,12 @@
         ];
       };
 
+      # Project templates: `nix flake init -t ~/nixos-config#c && direnv allow`
+      templates.c = {
+        path = ./templates/c;
+        description = "C/C++ dev shell (make, cmake, meson, autotools, gdb, valgrind, clangd) with direnv";
+      };
+
       # Local AI tooling: `nix develop`.
       devShells = forAllSystems (pkgs: {
         default = pkgs.mkShell {
