@@ -32,6 +32,12 @@
   # GTK's; the rest of the portal config is niri's own.
   xdg.portal.config.niri."org.freedesktop.impl.portal.FileChooser" = lib.mkForce "dfiles";
 
+  # RemoteDesktop (KDE Connect "Remote input"): the gnome portal needs
+  # org.gnome.Mutter.RemoteDesktop, which niri doesn't implement. luminous
+  # injects through wlr-virtual-pointer / virtual-keyboard, which niri has.
+  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-luminous ];
+  xdg.portal.config.niri."org.freedesktop.impl.portal.RemoteDesktop" = "luminous";
+
   # Calendar / online accounts / secrets backends for the shell's widgets
   services.gnome.evolution-data-server.enable = true;
   services.gnome.gnome-online-accounts.enable = true;
