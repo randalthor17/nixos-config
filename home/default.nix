@@ -1,4 +1,4 @@
-{ ... }:
+{ lib, ... }:
 
 {
   # Home-manager entry point for rand. The desktop shell (Dux Shell) is
@@ -13,7 +13,9 @@
     ./kdeconnect.nix
     ./dev.nix
     ./neovim.nix
-  ];
+  ]
+  # Optional: only when the launcher files are present in this repo.
+  ++ lib.optional (builtins.pathExists ./matlab/matlab-env.nix) ./matlab.nix;
 
   home.username = "rand";
   home.homeDirectory = "/home/rand";
