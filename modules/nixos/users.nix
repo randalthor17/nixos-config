@@ -11,6 +11,7 @@
       "audio"
       "storage"
       "i2c"
+      "uinput" # KDE Connect drawing tablet: virtual pen device via /dev/uinput
     ];
   };
 }
