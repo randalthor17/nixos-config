@@ -1,7 +1,10 @@
 { pkgs, inputs, ... }:
 
 {
-  imports = [ inputs.hid-hwre.nixosModules.default ];
+  imports = [
+    inputs.hid-hwre.nixosModules.default
+    inputs.hid-hwre.nixosModules.valuetop-display
+  ];
 
   hardware.graphics.enable = true;
   hardware.bluetooth.enable = true;
@@ -27,6 +30,11 @@
 
   # MK75 keyboard + ATK VXE R1 NK mouse: battery in UPower, keyboard backlight.
   hardware.hid-hwre.enable = true;
+
+  # ValueTop Tempest DF6 case display (CPU/GPU temp + cooler RPM). Also loads
+  # it87 for the IT8689E fan tachometer. Desktop only: leave this module out of
+  # a laptop's imports so it is never built or loaded there.
+  hardware.valuetop-display.enable = true;
 
   # The USB mouse dongle (wake-enabled) fires a PME wake if suspend starts while
   # input is still settling, so the PC wakes immediately. Delay entering S3

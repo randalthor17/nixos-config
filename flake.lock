@@ -41,11 +41,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1794688421,
-        "narHash": "sha256-EF17wvkzOyBNcP+ASpQGsHUOVr/PTomKBSh6b3tlMmA=",
+        "lastModified": 1794858756,
+        "narHash": "sha256-PW++MUZdXFTQ4UbEg96/439+ZsLqkGrRVLmz3RN8zwA=",
         "owner": "randalthor17",
         "repo": "hw-re-upower-kernel-module",
-        "rev": "fda0693fc5428f705547fbbeeb19632b088e6139",
+        "rev": "391ebbc015e76964614d4e4ebab2797ebaf6af10",
         "type": "github"
       },
       "original": {
