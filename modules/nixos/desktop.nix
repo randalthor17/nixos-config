@@ -11,6 +11,9 @@
   environment.systemPackages = with pkgs; [
     xwayland-satellite
     dux-gop
+    # Base GTK3 theme for Dux colors (Settings > Theme & Apps > Apply GTK
+    # colors copies it to ~/.local/share/themes and patches it).
+    adw-gtk3
   ];
 
   # ---- Dux Shell ---------------------------------------------------------
