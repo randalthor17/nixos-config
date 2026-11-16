@@ -16,6 +16,16 @@
     adw-gtk3
   ];
 
+  # ---- AppImages -----------------------------------------------------------
+  # binfmt: the kernel hands any AppImage (matched by its magic bytes, not the
+  # name) to appimage-run's FHS env, so `./Foo.AppImage`, desktop entries and
+  # Gear Lever-integrated apps all just work. Missing libs for a specific
+  # AppImage: package = pkgs.appimage-run.override { extraPkgs = p: [ ... ]; }.
+  programs.appimage = {
+    enable = true;
+    binfmt = true;
+  };
+
   # ---- Dux Shell ---------------------------------------------------------
   # Greeter + shell and its companion tools (dsearch, dgop, dfiles, dcal).
   services.displayManager.dux-greeter = {
