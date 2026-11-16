@@ -29,6 +29,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Qt platform theme (KDE color-scheme based), see modules/nixos/desktop.nix.
+    qtengine = {
+      url = "github:kossLAN/qtengine";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Neovim colorschemes (also what Dux Shell's neovim template targets).
     base46 = {
       url = "github:duxlabs-dev/base46";
