@@ -1,4 +1,4 @@
-{ ... }:
+{ osConfig, ... }:
 
 {
   # niri itself is installed system-wide (modules/nixos/desktop.nix), so this module
@@ -31,10 +31,10 @@
     settings = {
       prefer-no-csd = { };
 
-      # Same cursor as home.pointerCursor (home/theming.nix)
+      # Cursor from the central theme (hosts/nixos/theme.nix)
       cursor = {
-        xcursor-theme = "Bibata-Modern-Ice";
-        xcursor-size = 24;
+        xcursor-theme = osConfig.theme.cursor.name;
+        xcursor-size = osConfig.theme.cursor.size;
       };
 
       hotkey-overlay.skip-at-startup = { };

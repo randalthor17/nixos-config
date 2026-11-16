@@ -1,4 +1,9 @@
-{ pkgs, inputs, ... }:
+{
+  pkgs,
+  inputs,
+  osConfig,
+  ...
+}:
 
 {
   imports = [ inputs.lazyvim.homeManagerModules.default ];
@@ -105,7 +110,7 @@
     -- Your existing LazyVim options can go here
 
     if vim.g.neovide then
-      vim.o.guifont = "GoogleSansCode Nerd Font:h14"
+      vim.o.guifont = "${osConfig.theme.fonts.mono.name}:h14"
       -- Turn off the graphical top bar/title bar for Window Managers
       vim.g.neovide_decorations = false
     end

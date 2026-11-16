@@ -8,6 +8,7 @@
     ./services.nix
     ./desktop.nix
     ./fonts.nix
+    ./theme.nix
     ./users.nix
   ];
 }
