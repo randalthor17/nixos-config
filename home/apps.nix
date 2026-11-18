@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 
 {
   programs.kitty = {
@@ -20,7 +20,11 @@
   #     installation_mode = "normal_installed";
   #   };
   # };
-  programs.chromium.enable = true;
+
+  # Helium: Chromium-based browser (flake input). Flags / Chrome policies:
+  # programs.helium.{flags,policies}.
+  imports = [ inputs.helium.homeModules.default ];
+  programs.helium.enable = true;
 
   programs.zathura.enable = true; # PDFs
   programs.mpv.enable = true;

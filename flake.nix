@@ -20,6 +20,12 @@
       };
     };
 
+    # Helium browser (Chromium-based, not in nixpkgs), see home/apps.nix.
+    helium = {
+      url = "github:oxcl/nix-flake-helium-browser";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Declarative flatpaks (qBittorrent), see modules/nixos/services.nix.
     nix-flatpak.url = "github:gmodena/nix-flatpak";
 
