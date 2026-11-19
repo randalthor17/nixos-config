@@ -1,5 +1,8 @@
 { pkgs, ... }:
 
+let
+  vestaRepo = pkgs.callPackage ../../pkgs/vesta-flatpak/repo.nix { };
+in
 {
   networking.networkmanager.enable = true;
 
@@ -45,19 +48,51 @@
         }}";
       }
 
-      # VESTA crystal viewer. Local bundle built from pkgs/vesta-flatpak/*.yml
-      # (flatpak-builder). It only contains a wrapper: VESTA itself is
-      # downloaded from jp-minerals.org on install (extra-data, hash-pinned in
-      # the manifest). If the manifest changes, rebuild the bundle and update
-      # sha256 here.
+      # VESTA crystal viewer, from the local repo built out of
+      # pkgs/vesta-flatpak/*.yml. (A .flatpak bundle can't be used: bundles
+      # drop the extra-data info.) The repo only holds a wrapper; VESTA itself
+      # is downloaded from jp-minerals.org on install (hash-pinned in the
+      # manifest) and must not be committed here, the repo is public.
+      # To update: rebuild with flatpak-builder --repo=pkgs/vesta-flatpak/repo.
       {
         appId = "org.jp_minerals.VESTA";
-        sha256 = "c53fcf3322404616ebc6c34eeca9faab4d08dd42d8a23ca64f6eb387f376fa15";
-        bundle = "${../../pkgs/vesta-flatpak/org.jp_minerals.VESTA.flatpak}";
+        origin = "vesta-local";
+      }
+    ];
+    remotes = [
+      {
+        name = "flathub";
+        location = "https://dl.flathub.org/repo/flathub.flatpakrepo";
+      }
+      {
+        name = "vesta-local";
+        location = "file://${vestaRepo}";
+        args = "--no-gpg-verify";
       }
     ];
 
     # Theming for flatpak apps: home/theming.nix (user-level global override).
+  };
+
+  # Keep exactly one VESTA remote (vesta-local), on every activation:
+  # - installing a .flatpak bundle (even by hand) creates a hidden
+  #   vesta<N>-origin remote each time, and they pile up. Delete them.
+  # - nix-flatpak only adds a remote if the name is missing, so after the repo
+  #   is rebuilt (new store path) vesta-local would keep the stale URL. Re-point it.
+  systemd.services.flatpak-managed-install = {
+    path = [
+      pkgs.flatpak
+      pkgs.gnugrep
+      pkgs.gnused
+    ];
+    preStart = ''
+      for n in $(grep -oE '^\[remote "vesta[0-9]*-origin"\]' /var/lib/flatpak/repo/config 2>/dev/null | sed -E 's/.*"(.*)".*/\1/'); do
+        flatpak remote-delete --system --force "$n" || true
+      done
+      if grep -q '^\[remote "vesta-local"\]' /var/lib/flatpak/repo/config 2>/dev/null; then
+        flatpak remote-modify --system --url=file://${vestaRepo} vesta-local || true
+      fi
+    '';
   };
 
   # winboat runs Windows in a container; it needs a runtime (and KVM).
