@@ -44,6 +44,17 @@
           inherit sha256;
         }}";
       }
+
+      # VESTA crystal viewer. Local bundle built from pkgs/vesta-flatpak/*.yml
+      # (flatpak-builder). It only contains a wrapper: VESTA itself is
+      # downloaded from jp-minerals.org on install (extra-data, hash-pinned in
+      # the manifest). If the manifest changes, rebuild the bundle and update
+      # sha256 here.
+      {
+        appId = "org.jp_minerals.VESTA";
+        sha256 = "c53fcf3322404616ebc6c34eeca9faab4d08dd42d8a23ca64f6eb387f376fa15";
+        bundle = "${../../pkgs/vesta-flatpak/org.jp_minerals.VESTA.flatpak}";
+      }
     ];
 
     # Theming for flatpak apps: home/theming.nix (user-level global override).

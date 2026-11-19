@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>org.jp_minerals.VESTA</id>
+  <name>VESTA</name>
+  <summary>3D visualization of crystal, volumetric and morphology data</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>LicenseRef-proprietary=https://jp-minerals.org/vesta/en/download.html</project_license>
+  <developer_name>Koichi Momma and Fujio Izumi</developer_name>
+  <url type="homepage">https://jp-minerals.org/vesta/en/</url>
+  <description>
+    <p>VESTA is a 3D visualization program for structural models, volumetric data such as electron/nuclear densities, and crystal morphologies.</p>
+    <p>This Flatpak downloads the upstream binary from the author's website at install time; it is not redistributed in the package. This is an unofficial package.</p>
+  </description>
+  <launchable type="desktop-id">org.jp_minerals.VESTA.desktop</launchable>
+  <content_rating type="oars-1.1"/>
+  <releases>
+    <release version="3.5.8" date="2022-08-11"/>
+  </releases>
+</component>

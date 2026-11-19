@@ -1,0 +1,4 @@
+#!/bin/sh
+set -e
+tar -xjf VESTA-gtk3.tar.bz2
+rm -f VESTA-gtk3.tar.bz2

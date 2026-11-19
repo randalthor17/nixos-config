@@ -1,0 +1,59 @@
+app-id: org.jp_minerals.VESTA
+runtime: org.gnome.Platform
+runtime-version: '50'
+sdk: org.gnome.Sdk
+command: vesta
+# VESTA's license forbids redistributing copies without written permission,
+# so the upstream tarball is fetched by the user's own Flatpak at install
+# time (extra-data) instead of being bundled in the package.
+build-options:
+  no-debuginfo: true
+  strip: false
+finish-args:
+  - --share=ipc
+  - --socket=x11
+  - --device=dri
+  - --filesystem=home
+  - --share=network   # only needed to fetch extra-data; harmless otherwise
+modules:
+  - name: glu
+    buildsystem: meson
+    cleanup:
+      - /include
+      - /lib/pkgconfig
+      - '*.a'
+    sources:
+      - type: archive
+        url: https://archive.mesa3d.org/glu/glu-9.0.3.tar.xz
+        sha256: bd43fe12f374b1192eb15fe20e45ff456b9bc26ab57f0eee919f96ca0f8a330f
+
+  - name: vesta
+    buildsystem: simple
+    build-commands:
+      - install -Dm755 apply_extra -t /app/bin/
+      - install -Dm755 vesta.sh /app/bin/vesta
+      - install -Dm644 org.jp_minerals.VESTA.desktop -t /app/share/applications/
+      - install -Dm644 org.jp_minerals.VESTA.metainfo.xml -t /app/share/metainfo/
+      - install -Dm644 icon/VESTA-gtk3/img/logo.png /app/share/icons/hicolor/128x128/apps/org.jp_minerals.VESTA.png
+      - install -Dm644 icon/VESTA-gtk3/img/logo@2x.png /app/share/icons/hicolor/256x256/apps/org.jp_minerals.VESTA.png
+    sources:
+      - type: file
+        path: data/apply_extra
+      - type: file
+        path: data/vesta.sh
+      - type: file
+        path: data/org.jp_minerals.VESTA.desktop
+      - type: file
+        path: data/org.jp_minerals.VESTA.metainfo.xml
+      # Build-time fetch used ONLY to lift the logo out as the app icon.
+      - type: archive
+        url: https://jp-minerals.org/vesta/archives/3.5.8/VESTA-gtk3.tar.bz2
+        sha256: 78bef025c2b31f1d64c9c7e06ad2b139d252b3a686893ee79ac74b3021868df8
+        strip-components: 0
+        dest: icon
+      - type: extra-data
+        filename: VESTA-gtk3.tar.bz2
+        url: https://jp-minerals.org/vesta/archives/3.5.8/VESTA-gtk3.tar.bz2
+        sha256: 78bef025c2b31f1d64c9c7e06ad2b139d252b3a686893ee79ac74b3021868df8
+        size: 24963082
+        only-arches: [x86_64]

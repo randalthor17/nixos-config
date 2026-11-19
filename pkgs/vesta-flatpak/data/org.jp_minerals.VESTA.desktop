@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=VESTA
+GenericName=Crystal Structure Visualizer
+Comment=3D visualization of crystal, volumetric and morphology data
+Exec=vesta %f
+Icon=org.jp_minerals.VESTA
+Terminal=false
+Categories=Education;Science;Chemistry;Physics;
+MimeType=chemical/x-cif;chemical/x-xyz;chemical/x-pdb;
